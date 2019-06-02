@@ -17,11 +17,11 @@ def create_pair(items, num):
     for i in range(num):
         # generate positive pair
         tmp = []
-        index = random.randint(len(items))
-        anchor = random.randint(len(items[index]))
-        positive = random.randint(len(items[index]))
+        index = random.randrange(len(items))
+        anchor = random.randrange(len(items[index]))
+        positive = random.randrange(len(items[index]))
         while anchor == positive:
-            positive = random.randint(len(items[index]))
+            positive = random.randrange(len(items[index]))
         tmp.append(items[index][anchor])
         tmp.append(items[index][positive])
         image_list.append(tmp)
@@ -30,10 +30,11 @@ def create_pair(items, num):
         # generate negative pair
         for j in range(3):
             tmp = []
-            index1 = random.randint(len(items))
+            index1 = random.randrange(len(items))
             while index == index1:
-                index1 = random.randint(len(items))
-            
+                index1 = random.randrange(len(items))
+
+            negative = random.randrange(len(items[index1]))
             tmp.append(items[index][anchor])
             tmp.append(items[index1][negative])
             image_list.append(tmp)
@@ -42,5 +43,21 @@ def create_pair(items, num):
 
     return image_list, label_list
 
+def create_filelist(directory):
+    file_list = []
+    for i in os.listdir(directory):
+        subdir = os.path.join(directory, i)
+        tmp = []
+        for j in os.listdir(subdir):
+            files = os.path.join(subdir, j)
+            tmp.append(files)
+        file_list.append(tmp)
 
+    return file_list
+
+if __name__ == "__main__":
+    file_list = create_filelist("/home/yongjie/github/siamese-network/data/orl_faces")
+    image_list, label_list = create_pair(file_list, 5)
+    print(image_list)
+    print(label_list)
 
