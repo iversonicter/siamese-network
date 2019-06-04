@@ -28,7 +28,7 @@ def create_pair(items, num):
         label_list.append(1)
 
         # generate negative pair
-        for j in range(3):
+        for j in range(1):
             tmp = []
             index1 = random.randrange(len(items))
             while index == index1:
@@ -57,7 +57,7 @@ def create_filelist(directory):
 
 if __name__ == "__main__":
     file_list = create_filelist("/home/yongjie/github/siamese-network/data/orl_faces")
-    image_list, label_list = create_pair(file_list, 5)
+    image_list, label_list = create_pair(file_list, 100)
     print(image_list)
     print(label_list)
 

@@ -5,7 +5,7 @@ import os
 import torch
 import torch.utils.data as Data
 from PIL import Image
-from torchvision import transform
+from torchvision import transforms
 
 class Face(Data.Dataset):
 
@@ -17,10 +17,10 @@ class Face(Data.Dataset):
     def __len__(self):
         return len(self.images)
 
-    def ___getitem__(self, index):
+    def __getitem__(self, index):
         image, label = self.images[index], self.labels[index]
-        img1 = Image.open(image[0]).convert("RGB")
-        img2 = Image.open(image[1]).convert("RGB")
+        img1 = Image.open(image[0])
+        img2 = Image.open(image[1])
 
         if self.transform is not None:
             img1 = self.transform(img1)
